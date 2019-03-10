@@ -6,5 +6,19 @@ before_install:
   - cd frontend
   - docker build -t dstasaski/docker-react -f Dockerfile.dev .
 
-script:
-  - docker run dstasaski/docker-react npm run test -- --coverage
+#script:
+#  - docker run dstasaski/docker-react npm run test -- --coverage
+
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "Docker Playground"
+  env: "DockerPlayground-env"
+  bucket_name: "elasticbeanstalk-us-east-2-277856193737"
+  bucket_path: "Docker Playground"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
