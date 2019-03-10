@@ -1,0 +1,10 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - cd frontend
+  - docker build -t dstasaski/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run dstasaski/docker-react npm run test -- --coverage
